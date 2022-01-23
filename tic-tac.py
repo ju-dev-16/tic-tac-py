@@ -2,9 +2,7 @@ from time import sleep
 
 class Table: 
     def __init__(self):
-        self.table = [1, 2, 3,
-                      4, 5, 6, 
-                      7, 8, 9]   
+        self.table = [1, 2, 3, 4, 5, 6, 7, 8, 9]   
     
     def get_table(self):
         print(
@@ -21,7 +19,24 @@ class Table:
                     break
                 else:
                     self.table[choose - 1] = current_player.get_symbol()
-                     
+                    
+    def check_row(self):
+        if self.table[0] == current_player.get_symbol() and self.table[1] == current_player.get_symbol() and self.table[2] == current_player.get_symbol():
+            print("\nWe have a winner! 🎉")
+            return True
+        elif self.table[3] == current_player.get_symbol() and self.table[4] == current_player.get_symbol() and self.table[5] == current_player.get_symbol():
+            print("\nWe have a winner! 🎉")
+            return True
+        elif self.table[6] == current_player.get_symbol() and self.table[7] == current_player.get_symbol() and self.table[8] == current_player.get_symbol():
+            print("\nWe have a winner! 🎉")
+            return True
+    
+    def check_split(self):
+        pass
+    
+    def check_quer(self):
+        pass    
+       
 table = Table()
 
 class Player:
@@ -49,7 +64,7 @@ def choose_number():
     choose = int(input("Wähle eine Zahl von 1-9: "))
     table.update(choose)
 
-def repeat_process():
+def game_loop():
     while True:
         if current_player.get_turn() is False:
             sleep(0.5)
@@ -61,8 +76,19 @@ def repeat_process():
             sleep(0.5)
             
         choose_number()
+        if table.check_row():
+            sleep(0.5) 
+            table.get_table()
+            print("")
+            break
         current_player.set_turn()
         table.get_table()
     
 if __name__ == "__main__":
-    repeat_process()
+    game_loop()
+
+# To do's:
+
+# -> prüfe spalten
+# -> prüfe diagonale
+# -> prüfe ob untentschieden
